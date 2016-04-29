@@ -1,13 +1,15 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux'
 import createLogger from 'redux-logger'
 
-const storeFactory = (reducerRegistry) => {
+storeFactory.$inject = ['reducerRegistry']
+
+function storeFactory(reducerRegistry) {
     let reducers = reducerRegistry.getReducers()
 
     if (Object.keys(reducers).length === 0) {
         // Create empty reducer
         reducers = (state = {}, action) => {
-            return state;
+            return state
         }
     }
 
@@ -21,10 +23,8 @@ const storeFactory = (reducerRegistry) => {
         store.replaceReducer(combineReducers(reducers))
     })
 
-    return store;
+    return store
 }
-
-storeFactory.$inject = ['reducerRegistry']
 
 export default function provide(ngModule) {
     ngModule.factory('store', storeFactory)

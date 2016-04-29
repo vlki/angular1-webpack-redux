@@ -1,7 +1,9 @@
 import template from './todolist.html'
 import controller from './todolist.controller.js'
 
-const setupStates = ($stateProvider) => {
+setupStates.$inject = ['$stateProvider']
+
+function setupStates($stateProvider) {
     $stateProvider
         .state('todolist', {
             url: '/',
@@ -10,8 +12,6 @@ const setupStates = ($stateProvider) => {
             controllerAs: 'vm'
         })
 }
-
-setupStates.$inject = ['$stateProvider']
 
 export default function provide(ngModule) {
     ngModule.config(setupStates)
