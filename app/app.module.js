@@ -2,6 +2,9 @@
 
 var angular = require('angular');
 
-angular.module('app', {
-    require('ui.router')
-})
+var appModule = angular.module('app', [
+    require('angular-ui-router'),
+    require('./todolist/todolist.module.js')
+]);
+
+require('./router_config.js')(appModule);
