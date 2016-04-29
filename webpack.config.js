@@ -24,5 +24,11 @@ module.exports = {
         })
     ],
 
-    devtool: 'eval'
+    devtool: 'eval',
+
+    devServer: {
+        // Means that all requests which does not match any asset will be
+        // served by the index.html
+        historyApiFallback: true
+    }
 };

@@ -1,9 +1,10 @@
 'use strict';
 
-routerConfig.$inject = ['$urlRouterProvider'];
+routerConfig.$inject = ['$urlRouterProvider', '$locationProvider'];
 
-function routerConfig($urlRouterProvider) {
+function routerConfig($urlRouterProvider, $locationProvider) {
     $urlRouterProvider.otherwise('/');
+    $locationProvider.html5Mode(true);
 }
 
 module.exports = function(ngModule) {
