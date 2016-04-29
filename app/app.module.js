@@ -8,3 +8,5 @@ var appModule = angular.module('app', [
 ]);
 
 require('./router_config.js')(appModule);
+require('./reducer_registry.service.js')(appModule);
+require('./store.service.js')(appModule);
