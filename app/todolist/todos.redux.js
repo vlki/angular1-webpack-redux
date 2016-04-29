@@ -1,42 +1,30 @@
-'use strict';
+import todo from './todo.redux.js'
 
-var todo = require('./todo.redux.js').reducer;
+const ADD_TODO = 'todolist/ADD_TODO'
+const INITIAL_STATE = []
 
-var ADD_TODO = 'todolist/ADD_TODO';
-
-function reducer(state, action) {
-    if (state === undefined) {
-        return [];
-    }
-
-    state = state.map(function(t) {
-        return todo(t, action);
-    });
+export default function reducer(state = INITIAL_STATE, action) {
+    state = state.map((t) => todo(t, action))
 
     switch (action.type) {
         case ADD_TODO:
-            return state.concat({
+            return [...state, {
                 id: action.id,
                 text: action.text,
                 completed: false
-            });
+            }]
 
         default:
-            return state;
+            return state
     }
 }
 
-var newTodoId = 0;
+let newTodoId = 0
 
-function addTodo(text) {
+export function addTodo(text) {
     return {
         type: ADD_TODO,
         text: text,
         id: newTodoId++
-    };
+    }
 }
-
-module.exports = {
-    reducer: reducer,
-    addTodo: addTodo
-};

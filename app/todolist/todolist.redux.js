@@ -1,19 +1,14 @@
-'use strict';
+import { combineReducers } from 'redux'
+import visibilityFilter from './visibility_filter.redux.js'
+import todos from './todos.redux.js'
 
-var combineReducers = require('redux').combineReducers;
+const todolist = combineReducers({
+    visibilityFilter,
+    todos
+})
 
-var visibilityFilter = require('./visibility_filter.redux.js').reducer;
-var todos = require('./todos.redux.js').reducer;
-
-var reducer = combineReducers({
-    visibilityFilter: visibilityFilter,
-    todos: todos
-});
-
-module.exports = {
-    provide: function(ngModule) {
-        ngModule.run(['reducerRegistry', function(reducerRegistry) {
-            reducerRegistry.register({ todolist: reducer });
-        }]);
-    }
-};
+export default function provide(ngModule) {
+    ngModule.run(['reducerRegistry', (reducerRegistry) => {
+        reducerRegistry.register({ todolist })
+    }])
+}

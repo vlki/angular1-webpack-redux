@@ -1,12 +1,12 @@
 'use strict';
 
-routerConfig.$inject = ['$urlRouterProvider', '$locationProvider'];
-
-function routerConfig($urlRouterProvider, $locationProvider) {
-    $urlRouterProvider.otherwise('/');
-    $locationProvider.html5Mode(true);
+const routerConfig = ($urlRouterProvider, $locationProvider) => {
+    $urlRouterProvider.otherwise('/')
+    $locationProvider.html5Mode(true)
 }
 
-module.exports = function(ngModule) {
-    ngModule.config(routerConfig);
+routerConfig.$inject = ['$urlRouterProvider', '$locationProvider']
+
+export default function provide(ngModule) {
+    ngModule.config(routerConfig)
 };

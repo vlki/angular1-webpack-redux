@@ -11,6 +11,9 @@
   "author": "Jan Vlcek <vlki@vlki.cz>",
   "license": "MIT",
   "devDependencies": {
+    "babel-core": "^6.7.7",
+    "babel-loader": "^6.2.4",
+    "babel-preset-es2015": "^6.6.0",
     "html-loader": "^0.4.3",
     "html-webpack-plugin": "^2.16.0",
     "ngtemplate-loader": "^1.3.1",

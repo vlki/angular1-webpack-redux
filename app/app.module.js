@@ -1,12 +1,17 @@
-'use strict';
+import angular from 'angular'
+import angularUiRouter from 'angular-ui-router'
+import todolist from './todolist'
 
-var angular = require('angular');
+const appModule = angular.module('app', [
+    angularUiRouter,
+    todolist
+])
 
-var appModule = angular.module('app', [
-    require('angular-ui-router'),
-    require('./todolist/todolist.module.js')
-]);
+import storeProvide from './store.service.js'
+storeProvide(appModule)
 
-require('./router_config.js')(appModule);
-require('./reducer_registry.service.js')(appModule);
-require('./store.service.js')(appModule);
+import routerConfigProvide from './router_config.js'
+routerConfigProvide(appModule)
+
+import reducerRegistryProvide from './reducer_registry.service.js'
+reducerRegistryProvide(appModule)

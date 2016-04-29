@@ -1,36 +1,25 @@
-'use strict';
+const TOGGLE_TODO = 'todolist/TOGGLE_TODO'
+const INITIAL_STATE = {}
 
-var angular = require('angular');
-var TOGGLE_TODO = 'todolist/TOGGLE_TODO';
-
-function reducer(state, action) {
-    if (state === undefined) {
-        return {};
-    }
-
+export default function reducer(state = INITIAL_STATE, action) {
     switch (action.type) {
         case TOGGLE_TODO:
             if (state.id !== action.id) {
-                return state;
+                return state
             }
 
-            return angular.extend({}, state, {
+            return Object.assign({}, state, {
                 completed: !state.completed
-            });
+            })
 
         default:
-            return state;
+            return state
     }
 }
 
-function toggleTodo(id) {
+export function toggleTodo(id) {
     return {
         type: TOGGLE_TODO,
         id: id
-    };
+    }
 }
-
-module.exports = {
-    reducer: reducer,
-    toggleTodo: toggleTodo
-};

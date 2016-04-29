@@ -11,6 +11,14 @@ module.exports = {
     module: {
         loaders: [
             {
+                test: /\.js$/,
+                exclude: /(node_modules)/,
+                loader: 'babel',
+                query: {
+                    presets: ['es2015']
+                }
+            },
+            {
                 test: /\.html/,
                 exclude: /index\.webpack\.html/,
                 loaders: ['ngtemplate?relativeTo=' + __dirname, 'html']

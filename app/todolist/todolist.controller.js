@@ -1,70 +1,62 @@
-'use strict';
+import * as todos from './todos.redux.js'
+import * as visibilityFilter from './visibility_filter.redux.js'
+import * as todo from './todo.redux.js'
 
-var todos = require('./todos.redux.js');
-var visibilityFilter = require('./visibility_filter.redux.js');
-var todo = require('./todo.redux.js');
+TodolistController.$inject = ['$scope', 'store']
 
-TodolistController.$inject = ['$scope', 'store'];
+export default function TodolistController($scope, store) {
+    const vm = this
 
-function TodolistController($scope, store) {
-    var vm = this;
+    vm.todos
+    vm.newTodo = ''
+    vm.addTodo = addTodo
 
-    vm.todos;
-    vm.newTodo = '';
-    vm.addTodo = addTodo;
+    vm.visibilityFilter
+    vm.setVisibilityFilter = setVisibilityFilter
 
-    vm.visibilityFilter;
-    vm.setVisibilityFilter = setVisibilityFilter;
+    vm.toggleTodo = toggleTodo
 
-    vm.toggleTodo = toggleTodo;
-
-    activate();
+    activate()
 
     /////
 
     function activate() {
-        var unsubscribe = store.subscribe(_updateScopeFromState);
-        _updateScopeFromState();
+        let unsubscribe = store.subscribe(_updateScopeFromState)
+        _updateScopeFromState()
 
-        $scope.$on('$destroy', unsubscribe);
+        $scope.$on('$destroy', unsubscribe)
     }
 
     function _updateScopeFromState() {
-        var state = store.getState().todolist;
+        var state = store.getState().todolist
 
-        vm.todos = _visibleTodosOnly(state.todos, state.visibilityFilter);
-        vm.visibilityFilter = state.visibilityFilter;
+        vm.todos = _visibleTodosOnly(state.todos, state.visibilityFilter)
+        vm.visibilityFilter = state.visibilityFilter
     }
 
     function _visibleTodosOnly(todos, visibilityFilter) {
         switch (visibilityFilter) {
             case 'SHOW_ALL':
-                return todos;
+                return todos
 
             case 'SHOW_COMPLETED':
-                return todos.filter(function(t) {
-                    return t.completed;
-                });
+                return todos.filter(t => t.completed)
 
             case 'SHOW_ACTIVE':
-                return todos.filter(function(t) {
-                    return !t.completed;
-                });
+                return todos.filter(t => !t.completed)
         }
     }
 
     function addTodo() {
-        store.dispatch(todos.addTodo(vm.newTodo));
-        vm.newTodo = '';
+        store.dispatch(todos.addTodo(vm.newTodo))
+        vm.newTodo = ''
     }
 
     function setVisibilityFilter(filter) {
-        store.dispatch(visibilityFilter.setVisibilityFilter(filter));
+        store.dispatch(visibilityFilter.setVisibilityFilter(filter))
     }
 
     function toggleTodo(id) {
-        store.dispatch(todo.toggleTodo(id));
+        store.dispatch(todo.toggleTodo(id))
     }
 }
-
-module.exports = TodolistController;
