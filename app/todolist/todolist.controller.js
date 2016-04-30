@@ -1,6 +1,6 @@
-import * as todos from './todos.redux.js'
-import * as visibilityFilter from './visibility_filter.redux.js'
-import * as todo from './todo.redux.js'
+import * as todos from '../todos/todos.duck.js'
+import * as visibilityFilter from './visibility_filter.duck.js'
+import * as todo from '../todos/todo.duck.js'
 
 TodolistController.$inject = ['$scope', 'store']
 
@@ -28,10 +28,10 @@ export default function TodolistController($scope, store) {
     }
 
     function _updateScopeFromState() {
-        var state = store.getState().todolist
+        var state = store.getState()
 
-        vm.todos = _visibleTodosOnly(state.todos, state.visibilityFilter)
-        vm.visibilityFilter = state.visibilityFilter
+        vm.todos = _visibleTodosOnly(state.todos, state.todolist.visibilityFilter)
+        vm.visibilityFilter = state.todolist.visibilityFilter
     }
 
     function _visibleTodosOnly(todos, visibilityFilter) {

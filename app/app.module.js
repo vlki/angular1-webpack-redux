@@ -1,10 +1,12 @@
 import angular from 'angular'
 import angularUiRouter from 'angular-ui-router'
 import todolist from './todolist'
+import todos from './todos'
 
 const appModule = angular.module('app', [
     angularUiRouter,
-    todolist
+    todolist,
+    todos
 ])
 
 import storeProvide from './store.service.js'

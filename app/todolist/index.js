@@ -5,7 +5,7 @@ const todolistModule = angular.module('app.todolist', [])
 import statesProvide from './states.js'
 statesProvide(todolistModule)
 
-import reduxProvide from './todolist.redux.js'
-reduxProvide(todolistModule)
+import duckProvide from './todolist.duck.js'
+duckProvide(todolistModule)
 
 export default todolistModule.name

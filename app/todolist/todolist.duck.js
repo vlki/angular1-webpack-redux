@@ -1,10 +1,8 @@
 import { combineReducers } from 'redux'
-import visibilityFilter from './visibility_filter.redux.js'
-import todos from './todos.redux.js'
+import visibilityFilter from './visibility_filter.duck.js'
 
 const todolist = combineReducers({
-    visibilityFilter,
-    todos
+    visibilityFilter
 })
 
 export default function provide(ngModule) {

@@ -1,7 +1,7 @@
-const SET_VISIBILITY_FILTER = 'todolist/SET_VISIBILITY_FILTER'
-const INITIAL_STATE = 'SHOW_ALL';
+const SET_VISIBILITY_FILTER = 'todolist/visibility_filter/SET_VISIBILITY_FILTER'
+const INITIAL_STATE = 'SHOW_ALL'
 
-export default function reducer(state = INITIAL_STATE, action) {
+export default function visibilityFilter(state = INITIAL_STATE, action) {
     switch (action.type) {
         case SET_VISIBILITY_FILTER:
             return action.filter

@@ -1,9 +1,9 @@
-import todo from './todo.redux.js'
+import todo from './todo.duck.js'
 
-const ADD_TODO = 'todolist/ADD_TODO'
+const ADD_TODO = 'todos/todos/ADD_TODO'
 const INITIAL_STATE = []
 
-export default function reducer(state = INITIAL_STATE, action) {
+function todos(state = INITIAL_STATE, action) {
     state = state.map((t) => todo(t, action))
 
     switch (action.type) {
@@ -27,4 +27,10 @@ export function addTodo(text) {
         text: text,
         id: newTodoId++
     }
+}
+
+export default function provide(ngModule) {
+    ngModule.run(['reducerRegistry', (reducerRegistry) => {
+        reducerRegistry.register({ todos })
+    }])
 }
