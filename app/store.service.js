@@ -1,4 +1,4 @@
-import { createStore, applyMiddleware, combineReducers } from 'redux'
+import { createStore, applyMiddleware, combineReducers, compose } from 'redux'
 import createLogger from 'redux-logger'
 
 storeFactory.$inject = ['reducerRegistry']
@@ -17,7 +17,14 @@ function storeFactory(reducerRegistry) {
 
     const store = createStore(
         combineReducers(reducers),
-        applyMiddleware(logger));
+        compose(
+            applyMiddleware(logger),
+
+            // If there is Redux dev tools extension, connect to it
+            // See https://github.com/zalmoxisus/redux-devtools-extension#2-use-with-redux
+            window.devToolsExtension ? window.devToolsExtension() : f => f
+        )
+    )
 
     reducerRegistry.setChangeListener((reducers) => {
         store.replaceReducer(combineReducers(reducers))
