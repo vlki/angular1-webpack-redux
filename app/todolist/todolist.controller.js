@@ -21,7 +21,7 @@ export default function TodolistController($scope, store) {
     /////
 
     function activate() {
-        let unsubscribe = store.subscribe(_updateScopeFromState)
+        let unsubscribe = store.subscribe(() => $scope.$applyAsync(_updateScopeFromState))
         _updateScopeFromState()
 
         $scope.$on('$destroy', unsubscribe)
